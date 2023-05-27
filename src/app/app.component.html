@@ -1,12 +1,18 @@
 <div class="app">
   <div class="main-container">
     <div class="header center">
-      <div class="USD-container">
+      <div class="header-container">
+        <p>{{ date | date }}</p>
+      </div>
+      <div class="header-container">
         <p>1 USD - 38 UAH</p>
       </div>
-      <div class="EUR-container"><p>1 EUR - 40 UAH</p></div>
+      <div class="header-container"><p>1 EUR - 40 UAH</p></div>
+      <!-- <div class="header-container">
+        <p>{{ }}</p>
+      </div> -->
     </div>
-    <h1 class="main-header center">Currency Calculator</h1>
+    <h1 class="main-header center">{{ title }}</h1>
     <div class="body-container">
       <div class="main-currency-container container-secondary center">
         <div class="currency currency_active">
@@ -53,7 +59,9 @@
         </div>
         <div class="equality-container round-container center"><p>is</p></div>
         <div class="result-container center">
-          <p class="result-paragraph">[Result] CUR</p>
+          <p class="result-paragraph">
+            {{ "123" | currency }}
+          </p>
         </div>
       </div>
     </div>
