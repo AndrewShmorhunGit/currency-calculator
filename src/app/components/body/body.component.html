@@ -8,7 +8,10 @@
       <!-- -->
     </app-currency>
 
-    <div class="to-container add-currency-container round-container center">
+    <div
+      class="to-container add-currency-container round-container center"
+      (click)="modalService.open()"
+    >
       <app-add-currency></app-add-currency>
     </div>
   </div>
@@ -58,5 +61,3 @@
     </div>
   </div>
 </div>
-
-<app-modal></app-modal>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { CurrencyEnum } from 'src/app/data/currencies';
+// import { CurrencyEnum } from 'src/app/data/currencies';
 import { Currency, StatusEnum } from 'src/app/data/currency';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-body',
@@ -8,6 +9,7 @@ import { Currency, StatusEnum } from 'src/app/data/currency';
   styleUrls: ['./body.component.scss'],
 })
 export class BodyComponent {
+  constructor(public modalService: ModalService) {}
   date = new Date().toString();
 
   curArr1: Currency[] = [
@@ -56,6 +58,7 @@ export class BodyComponent {
     },
   ];
 
+  modalState: false;
   value: number = 1;
   activeCurrency1: string = 'USD';
   activeCurrency2: string = 'UAH';

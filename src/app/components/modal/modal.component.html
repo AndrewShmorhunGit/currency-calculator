@@ -1,1 +1,15 @@
-<div class="modal-container"></div>
+<div class="modal-container center" (click)="modalService.close()"></div>
+<div class="modal-window">
+  <h2 class="modal-title">add currencies</h2>
+  <div class="currencies-container">
+    <app-currency
+      *ngFor="let currencyObj of currencies"
+      [currencyObj]="currencyObj"
+      (click)="prepareToAdd(currencyObj)"
+    >
+    </app-currency>
+  </div>
+  <div class="button-container center">
+    <button class="add-currencies" (click)="addToList()">add to list</button>
+  </div>
+</div>

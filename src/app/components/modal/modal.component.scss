@@ -1,0 +1,52 @@
+.modal-container {
+  background-color: rgb(0, 0, 0, 0.5);
+  // opacity: 60%;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transition: 0.8s ease all;
+}
+
+.modal-window {
+  position: absolute;
+  top: 18rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120rem;
+  height: 36rem;
+  border-radius: 2.4rem;
+  background-color: #f1f3f5;
+}
+
+.modal-title {
+  text-align: center;
+  font-size: 3.6rem;
+  text-transform: capitalize;
+  padding: 3.2rem 0;
+}
+
+.currencies-container {
+  display: flex;
+  // flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 0rem 4rem;
+}
+
+.add-currencies {
+  text-transform: capitalize;
+  border-radius: 0.8rem;
+  margin-top: 3.6rem;
+  padding: 2rem 4rem;
+  font-size: 2rem;
+  transition: ease all 0.5s;
+
+  &:hover {
+    transform: scale(1.03);
+    transform: translateY(-0.2rem);
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.25);
+  }
+}
