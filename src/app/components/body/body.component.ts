@@ -9,22 +9,20 @@ import { Currency, StatusEnum } from 'src/app/data/currency';
 })
 export class BodyComponent {
   date = new Date().toString();
-  // currencyObj1: Currency;
-  // currencyObj2: Currency;
 
   curArr1: Currency[] = [
     {
-      currency: CurrencyEnum.USD,
+      currency: 'USD',
       description: 'united states dollar',
       status: StatusEnum.ACTIVE,
     },
     {
-      currency: CurrencyEnum.EUR,
+      currency: 'EUR',
       description: 'euro',
       status: StatusEnum.AVAILABLE,
     },
     {
-      currency: CurrencyEnum.UAH,
+      currency: 'UAH',
       description: 'Ukrainian hryvnia',
       status: StatusEnum.NOT_AVAILABLE,
     },
@@ -32,17 +30,17 @@ export class BodyComponent {
 
   curArr2: Currency[] = [
     {
-      currency: CurrencyEnum.USD,
+      currency: 'USD',
       description: 'united states dollar',
       status: StatusEnum.NOT_AVAILABLE,
     },
     {
-      currency: CurrencyEnum.EUR,
+      currency: 'EUR',
       description: 'euro',
       status: StatusEnum.AVAILABLE,
     },
     {
-      currency: CurrencyEnum.UAH,
+      currency: 'UAH',
       description: 'Ukrainian hryvnia',
       status: StatusEnum.ACTIVE,
     },
@@ -51,20 +49,18 @@ export class BodyComponent {
   value: number = 1;
   activeCurrency1: string = 'USD';
   activeCurrency2: string = 'UAH';
-  // activeCurrencyLine1(arr: Currency[]): void {
-  //   arr.find((currency) => {
-  //     if (currency.status === StatusEnum.ACTIVE) {
-  //      return this.active1 = currency.currency;
-  //     } else {
-  //       this.active1 = 'NO ACTIVE';
-  //     }
-  //   });
-  // }
 
-  // checkActive() {
-  //   this.activeCurrencyLine1(this.curArr1);
-  //   console.log(`LINE 1 ACTIVE: ${this.active1}`);
-  // }
+  checkActive(currencyObj: Currency, isLine1: boolean): void {
+    if (currencyObj) {
+      if (isLine1) {
+        this.activeCurrency1 = currencyObj.currency;
+        console.log(`active1: ${this.activeCurrency1}`);
+        return;
+      }
+      this.activeCurrency2 = currencyObj.currency;
+      console.log(`active2: ${this.activeCurrency2}`);
+    }
+  }
 
   changeStatusToAvailable(currencyObj: Currency): void {
     currencyObj.status = StatusEnum.AVAILABLE;
@@ -185,5 +181,7 @@ export class BodyComponent {
         }
       });
     }
+
+    this.checkActive(currencyObj, !findLine2);
   }
 }

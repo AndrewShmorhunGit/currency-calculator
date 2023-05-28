@@ -7,7 +7,7 @@ export enum StatusEnum {
 }
 
 export interface Currency {
-  currency: CurrencyEnum;
+  currency: string;
   description?: string;
   status: StatusEnum;
 }
