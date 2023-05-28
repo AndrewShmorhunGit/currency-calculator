@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { currencyToAdd } from 'src/app/data/currencies';
+import { Component, Input } from '@angular/core';
+
 import { Currency, StatusEnum } from 'src/app/data/currency';
+import { ExchangeService } from 'src/app/services/exchange.service';
 import { ModalService } from 'src/app/services/modal.service';
-import { Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-modal',
@@ -11,12 +11,11 @@ import { Output, EventEmitter } from '@angular/core';
 })
 export class ModalComponent {
   constructor(
-    public modalService: ModalService // public bodyComponent: BodyComponent
+    public modalService: ModalService,
+    public exchangeService: ExchangeService
   ) {}
-  @Output() addToList = new EventEmitter<Currency[]>();
 
-  currencies: Currency[] = currencyToAdd;
-
+  currencies: Currency[] = this.exchangeService.currencyToAdd;
   tempCurrArray: Currency[] = [];
 
   prepareToAdd(currencyObj: Currency): Currency[] {
@@ -47,8 +46,4 @@ export class ModalComponent {
       return curr;
     });
   }
-
-  // addToList():  {
-  //   this.updateCurrencies();
-  // }
 }

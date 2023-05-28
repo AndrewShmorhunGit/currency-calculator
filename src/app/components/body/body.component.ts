@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { currencyLine1, currencyLine2 } from 'src/app/data/currencies';
 // import { CurrencyEnum } from 'src/app/data/currencies';
 import { Currency, StatusEnum } from 'src/app/data/currency';
+import { ExchangeService } from 'src/app/services/exchange.service';
 import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
@@ -10,14 +10,16 @@ import { ModalService } from 'src/app/services/modal.service';
   styleUrls: ['./body.component.scss'],
 })
 export class BodyComponent {
-  constructor(public modalService: ModalService) {}
+  constructor(
+    public modalService: ModalService,
+    public exchangeService: ExchangeService
+  ) {}
   date = new Date().toString();
 
-  curArr1: Currency[] = currencyLine1;
+  curArr1: Currency[] = this.exchangeService.currencyLine1;
 
-  curArr2: Currency[] = currencyLine2;
+  curArr2: Currency[] = this.exchangeService.currencyLine2;
 
-  modalState: false;
   value: number = 1;
   activeCurrency1: string = 'USD';
   activeCurrency2: string = 'UAH';

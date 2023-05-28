@@ -12,6 +12,7 @@
   <div class="button-container center">
     <button
       class="add-currencies"
+      (click)="exchangeService.updateLists(tempCurrArray)"
       (click)="updateCurrencies()"
       (click)="modalService.close()"
     >
