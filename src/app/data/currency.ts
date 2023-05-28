@@ -1,5 +1,3 @@
-import { CurrencyEnum } from './currencies';
-
 export enum StatusEnum {
   ACTIVE = 'ACTIVE',
   AVAILABLE = 'AVAILABLE',
@@ -14,5 +12,5 @@ export interface Currency {
 
 export interface AddCurrency {
   currency: '+';
-  description: 'add currency';
+  description?: 'add';
 }

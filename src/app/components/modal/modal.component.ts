@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { currencyToAdd } from 'src/app/data/currencies';
 import { Currency, StatusEnum } from 'src/app/data/currency';
 import { ModalService } from 'src/app/services/modal.service';
+// import { BodyComponent } from '../body/body.component';
 
 @Component({
   selector: 'app-modal',
@@ -8,44 +10,15 @@ import { ModalService } from 'src/app/services/modal.service';
   styleUrls: ['./modal.component.scss'],
 })
 export class ModalComponent {
-  constructor(public modalService: ModalService) {}
-  currencies: Currency[] = [
-    {
-      currency: 'AUD',
-      description: 'australian dollar',
-      status: StatusEnum.AVAILABLE,
-    },
-    {
-      currency: 'CAD',
-      description: 'canadian dollar',
-      status: StatusEnum.AVAILABLE,
-    },
-    {
-      currency: 'IDR',
-      description: 'indian rupee',
-      status: StatusEnum.AVAILABLE,
-    },
-    {
-      currency: 'JPY',
-      description: 'japanese yen',
-      status: StatusEnum.AVAILABLE,
-    },
-    {
-      currency: 'PLN',
-      description: 'polish zloty',
-      status: StatusEnum.AVAILABLE,
-    },
-    {
-      currency: 'RUB',
-      description: 'russian ruble',
-      status: StatusEnum.AVAILABLE,
-    },
-  ];
+  constructor(
+    public modalService: ModalService // public bodyComponent: BodyComponent
+  ) {}
+  currencies: Currency[] = currencyToAdd;
 
   tempCurrArray: Currency[] = [];
 
-  prepareToAdd(currencyObj: Currency): void {
-    if (currencyObj.status === StatusEnum.NOT_AVAILABLE) return;
+  prepareToAdd(currencyObj: Currency): Currency[] {
+    if (currencyObj.status === StatusEnum.NOT_AVAILABLE) return this.currencies;
 
     if (currencyObj) {
       currencyObj.status === StatusEnum.AVAILABLE
@@ -55,16 +28,28 @@ export class ModalComponent {
         this.tempCurrArray = this.tempCurrArray.filter(
           (curr) => curr !== currencyObj
         );
-        return;
+        return this.currencies;
       }
       this.tempCurrArray.push(currencyObj);
     }
     console.log(this.tempCurrArray);
+    return this.currencies;
   }
 
   addToList() {
     if (this.tempCurrArray.length === 0) return;
 
+    const arrToPush = this.tempCurrArray.map(
+      (cur) => (cur.status = StatusEnum.AVAILABLE)
+    );
+
+    this.currencies = this.currencies.map((curr) => {
+      this.tempCurrArray.find((tempCurr) => {
+        if (curr.currency === tempCurr.currency)
+          curr.status = StatusEnum.NOT_AVAILABLE;
+      });
+      return curr;
+    });
     console.log(this.tempCurrArray);
   }
 }

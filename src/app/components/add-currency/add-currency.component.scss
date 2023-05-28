@@ -4,12 +4,13 @@
   align-items: center;
   justify-content: center;
   transition: all ease 0.5s;
+  cursor: pointer;
   p {
     font-size: 4rem;
     text-transform: capitalize;
   }
   p + p {
-    font-size: 1.2rem;
+    font-size: 1.8rem;
     text-align: center;
   }
 }

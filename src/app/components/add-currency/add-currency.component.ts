@@ -7,5 +7,5 @@ import { AddCurrency, Currency } from 'src/app/data/currency';
   styleUrls: ['./add-currency.component.scss'],
 })
 export class AddCurrencyComponent {
-  addCurrency: AddCurrency = { currency: '+', description: 'add currency' };
+  addCurrency: AddCurrency = { currency: '+', description: 'add' };
 }

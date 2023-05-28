@@ -10,6 +10,12 @@
     </app-currency>
   </div>
   <div class="button-container center">
-    <button class="add-currencies" (click)="addToList()">add to list</button>
+    <button
+      class="add-currencies"
+      (click)="addToList()"
+      (click)="modalService.close()"
+    >
+      {{ tempCurrArray.length === 0 ? "back" : "add to list" }}
+    </button>
   </div>
 </div>
