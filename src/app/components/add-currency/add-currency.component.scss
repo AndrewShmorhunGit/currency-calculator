@@ -1,0 +1,26 @@
+.currency {
+  width: 16rem;
+  height: 12rem;
+  border-radius: 2rem;
+  background-color: #edf2ff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px #868e96 solid;
+  transition: all ease 0.5s;
+  p {
+    font-size: 4rem;
+    text-transform: capitalize;
+  }
+  p + p {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  &:hover {
+    transform: scale(1.03);
+    transform: translateY(-0.2rem);
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.25);
+  }
+}

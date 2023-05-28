@@ -8,6 +8,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { AddCurrencyComponent } from './components/add-currency/add-currency.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BodyComponent } from './components/body/body.component';
+import { FormsModule } from '@angular/forms';
+import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -16,8 +18,9 @@ import { BodyComponent } from './components/body/body.component';
     HeaderComponent,
     AddCurrencyComponent,
     BodyComponent,
+    ModalComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

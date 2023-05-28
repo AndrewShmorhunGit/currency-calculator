@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
-import { CurrencyEnum } from 'src/app/data/currencies';
-import { AddCurrency, Currency } from 'src/app/data/currency';
+import { Component, Input } from '@angular/core';
+import { Currency, StatusEnum } from 'src/app/data/currency';
 
 @Component({
   selector: 'app-currency',
@@ -8,15 +7,14 @@ import { AddCurrency, Currency } from 'src/app/data/currency';
   styleUrls: ['./currency.component.scss'],
 })
 export class CurrencyComponent {
-  currArr: Currency[] = [
-    { currency: CurrencyEnum.USD, description: 'united states dollar' },
-    { currency: CurrencyEnum.EUR, description: 'euro' },
-    { currency: CurrencyEnum.UAH, description: 'Ukrainian hryvnia' },
-  ];
+  @Input() currencyObj: Currency;
 
-  addCurrency: AddCurrency = { currency: '+', description: 'add currency' };
+  active = StatusEnum.ACTIVE;
+  notAvailable = StatusEnum.NOT_AVAILABLE;
+  available = StatusEnum.AVAILABLE;
 
-  addCurrencyToList(currency: CurrencyEnum, description: string): void {
-    this.currArr.push({ currency, description });
+  changeCurrencyStatus(currencyObj: Currency) {
+    console.log(currencyObj.status);
   }
+  // changeStatus(status) {}
 }
