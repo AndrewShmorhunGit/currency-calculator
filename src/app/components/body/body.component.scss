@@ -38,13 +38,20 @@
   background: #f8f9fa;
   border: 1px solid #ffffff;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 2rem;
 }
 
 .to-container {
   position: absolute;
-  left: 50%;
+  left: calc(50% - 5rem);
   top: 13rem;
-  transform: translateX(-50%);
+  transition: all 0.5s ease;
+
+  &:hover {
+    transform: scale(1.03);
+    transform: translateY(-0.2rem);
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.25);
+  }
 }
 
 .result-container {
@@ -55,6 +62,7 @@
   border: 2px #868e96 solid;
   border-radius: 1.2rem;
   gap: 1rem;
+
   p {
     font-size: 3.6rem;
   }
@@ -76,41 +84,22 @@
   }
 }
 
-.currency {
-  width: 16rem;
-  height: 12rem;
-  border-radius: 2rem;
-  background-color: #edf2ff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 2px #868e96 solid;
+.equality-container {
   transition: all ease 0.5s;
-  p {
-    font-size: 4rem;
-    text-transform: capitalize;
-  }
-  p + p {
-    font-size: 1.2rem;
-    text-align: center;
-  }
+}
+
+.equality-container:hover {
+  transform: scale(1.03);
+  transform: translateY(-0.2rem);
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.25);
+}
+
+.addcurency-container {
+  transition: all 0.5s ease;
 
   &:hover {
     transform: scale(1.03);
     transform: translateY(-0.2rem);
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.25);
   }
-}
-
-.currency_active {
-  color: black;
-  background-color: #8ce99a;
-  border: 2px black solid;
-}
-
-.currency_disabled,
-.currency_disabled:hover {
-  color: grey;
-  background-color: #f1f3f5;
 }

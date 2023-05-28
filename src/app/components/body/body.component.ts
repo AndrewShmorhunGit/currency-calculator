@@ -22,6 +22,11 @@ export class BodyComponent {
       status: StatusEnum.AVAILABLE,
     },
     {
+      currency: 'GBP',
+      description: 'great britain pound',
+      status: StatusEnum.AVAILABLE,
+    },
+    {
       currency: 'UAH',
       description: 'Ukrainian hryvnia',
       status: StatusEnum.NOT_AVAILABLE,
@@ -40,6 +45,11 @@ export class BodyComponent {
       status: StatusEnum.AVAILABLE,
     },
     {
+      currency: 'GBP',
+      description: 'great britain pound',
+      status: StatusEnum.AVAILABLE,
+    },
+    {
       currency: 'UAH',
       description: 'Ukrainian hryvnia',
       status: StatusEnum.ACTIVE,
@@ -54,11 +64,11 @@ export class BodyComponent {
     if (currencyObj) {
       if (isLine1) {
         this.activeCurrency1 = currencyObj.currency;
-        console.log(`active1: ${this.activeCurrency1}`);
+        // console.log(`active1: ${this.activeCurrency1}`);
         return;
       }
       this.activeCurrency2 = currencyObj.currency;
-      console.log(`active2: ${this.activeCurrency2}`);
+      // console.log(`active2: ${this.activeCurrency2}`);
     }
   }
 
@@ -80,8 +90,16 @@ export class BodyComponent {
       : StatusEnum.AVAILABLE;
   }
   reverseStatus() {
+    const [newActive1, newActive2] = [
+      this.activeCurrency1,
+      this.activeCurrency2,
+    ];
     this.curArr1.map((currency) => this.reverseCondition(currency));
     this.curArr2.map((currency) => this.reverseCondition(currency));
+    this.activeCurrency1 = newActive2;
+    this.activeCurrency2 = newActive1;
+    // console.log(`active1: ${this.activeCurrency1}`);
+    // console.log(`active2: ${this.activeCurrency2}`);
   }
 
   changeCurrencyStatus(currencyObj: Currency) {
