@@ -32,3 +32,49 @@ export const currencyToAdd = [
     status: StatusEnum.AVAILABLE,
   },
 ];
+
+export const currencyLine1 = [
+  {
+    currency: 'USD',
+    description: 'united states dollar',
+    status: StatusEnum.ACTIVE,
+  },
+  {
+    currency: 'EUR',
+    description: 'euro',
+    status: StatusEnum.AVAILABLE,
+  },
+  {
+    currency: 'GBP',
+    description: 'great britain pound',
+    status: StatusEnum.AVAILABLE,
+  },
+  {
+    currency: 'UAH',
+    description: 'Ukrainian hryvnia',
+    status: StatusEnum.NOT_AVAILABLE,
+  },
+];
+
+export const currencyLine2 = [
+  {
+    currency: 'USD',
+    description: 'united states dollar',
+    status: StatusEnum.NOT_AVAILABLE,
+  },
+  {
+    currency: 'EUR',
+    description: 'euro',
+    status: StatusEnum.AVAILABLE,
+  },
+  {
+    currency: 'GBP',
+    description: 'great britain pound',
+    status: StatusEnum.AVAILABLE,
+  },
+  {
+    currency: 'UAH',
+    description: 'Ukrainian hryvnia',
+    status: StatusEnum.ACTIVE,
+  },
+];

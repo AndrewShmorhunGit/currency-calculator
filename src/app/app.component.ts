@@ -8,5 +8,4 @@ import { ModalService } from './services/modal.service';
 })
 export class AppComponent {
   title = 'Currency Converter';
-  constructor(public modalService: ModalService) {}
 }

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { currencyToAdd } from 'src/app/data/currencies';
 import { Currency, StatusEnum } from 'src/app/data/currency';
 import { ModalService } from 'src/app/services/modal.service';
-// import { BodyComponent } from '../body/body.component';
+import { Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-modal',
@@ -13,6 +13,8 @@ export class ModalComponent {
   constructor(
     public modalService: ModalService // public bodyComponent: BodyComponent
   ) {}
+  @Output() addToList = new EventEmitter<Currency[]>();
+
   currencies: Currency[] = currencyToAdd;
 
   tempCurrArray: Currency[] = [];
@@ -36,13 +38,7 @@ export class ModalComponent {
     return this.currencies;
   }
 
-  addToList() {
-    if (this.tempCurrArray.length === 0) return;
-
-    const arrToPush = this.tempCurrArray.map(
-      (cur) => (cur.status = StatusEnum.AVAILABLE)
-    );
-
+  updateCurrencies() {
     this.currencies = this.currencies.map((curr) => {
       this.tempCurrArray.find((tempCurr) => {
         if (curr.currency === tempCurr.currency)
@@ -50,6 +46,9 @@ export class ModalComponent {
       });
       return curr;
     });
-    console.log(this.tempCurrArray);
   }
+
+  // addToList():  {
+  //   this.updateCurrencies();
+  // }
 }

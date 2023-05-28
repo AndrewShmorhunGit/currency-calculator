@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { currencyLine1, currencyLine2 } from 'src/app/data/currencies';
 // import { CurrencyEnum } from 'src/app/data/currencies';
 import { Currency, StatusEnum } from 'src/app/data/currency';
 import { ModalService } from 'src/app/services/modal.service';
@@ -12,51 +13,9 @@ export class BodyComponent {
   constructor(public modalService: ModalService) {}
   date = new Date().toString();
 
-  curArr1: Currency[] = [
-    {
-      currency: 'USD',
-      description: 'united states dollar',
-      status: StatusEnum.ACTIVE,
-    },
-    {
-      currency: 'EUR',
-      description: 'euro',
-      status: StatusEnum.AVAILABLE,
-    },
-    {
-      currency: 'GBP',
-      description: 'great britain pound',
-      status: StatusEnum.AVAILABLE,
-    },
-    {
-      currency: 'UAH',
-      description: 'Ukrainian hryvnia',
-      status: StatusEnum.NOT_AVAILABLE,
-    },
-  ];
+  curArr1: Currency[] = currencyLine1;
 
-  curArr2: Currency[] = [
-    {
-      currency: 'USD',
-      description: 'united states dollar',
-      status: StatusEnum.NOT_AVAILABLE,
-    },
-    {
-      currency: 'EUR',
-      description: 'euro',
-      status: StatusEnum.AVAILABLE,
-    },
-    {
-      currency: 'GBP',
-      description: 'great britain pound',
-      status: StatusEnum.AVAILABLE,
-    },
-    {
-      currency: 'UAH',
-      description: 'Ukrainian hryvnia',
-      status: StatusEnum.ACTIVE,
-    },
-  ];
+  curArr2: Currency[] = currencyLine2;
 
   modalState: false;
   value: number = 1;
