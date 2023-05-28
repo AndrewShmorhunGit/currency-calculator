@@ -25,7 +25,12 @@
       <label for="#amount">CUR Amount:</label>
       <input type="number" id="#amount" [(ngModel)]="value" />
     </div>
-    <div class="equality-container round-container center"><p>is</p></div>
+    <div
+      class="equality-container round-container center"
+      (click)="reverseStatus()"
+    >
+      <p>is</p>
+    </div>
     <div class="result-container center">
       <p class="result-paragraph">
         {{ "123" | currency }}

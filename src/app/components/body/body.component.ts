@@ -72,6 +72,18 @@ export class BodyComponent {
     currencyObj.status = StatusEnum.ACTIVE;
   }
 
+  reverseCondition(currency: Currency): void {
+    currency.status === StatusEnum.ACTIVE
+      ? (currency.status = StatusEnum.NOT_AVAILABLE)
+      : currency.status === StatusEnum.NOT_AVAILABLE
+      ? (currency.status = StatusEnum.ACTIVE)
+      : StatusEnum.AVAILABLE;
+  }
+  reverseStatus() {
+    this.curArr1.map((currency) => this.reverseCondition(currency));
+    this.curArr2.map((currency) => this.reverseCondition(currency));
+  }
+
   changeCurrencyStatus(currencyObj: Currency) {
     const findLine1 = this.curArr1.find((obj) => obj === currencyObj);
     const findLine2 = this.curArr2.find((obj) => obj === currencyObj);
