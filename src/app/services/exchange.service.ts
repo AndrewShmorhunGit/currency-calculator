@@ -254,7 +254,10 @@ export class ExchangeService {
     return (1 / data.rates.EUR).toFixed(2);
   }
 
-  getGbpHrn(data: Root | any) {
-    return (1 / data.rates.GBP).toFixed(2);
+  // Exchange calculator function
+
+  currCalc(data: Root | any, active1: string): number {
+    const list = data.rates;
+    return 1 / list[active1];
   }
 }

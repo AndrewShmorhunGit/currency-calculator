@@ -54,10 +54,13 @@
       </svg>
     </div>
     <div class="result-container center">
-      <p *ngIf="loading" class="loading-p">Loading</p>
-      <div *ngIf="loading" class="loading-decorator"></div>
+      <p *ngIf="loading" class="loading-p center">Loading..</p>
+      <div *ngIf="!loading" class="loading-decorator"></div>
       <p class="result-paragraph">
-        {{ 123 + exchangeService.activeCurrency2 }}
+        {{
+          this.exchangeService.currCalc(data, active1).toFixed(2) +
+            exchangeService.activeCurrency2
+        }}
       </p>
     </div>
   </div>
