@@ -9,6 +9,7 @@ import {
   allCurrenciesCopy2,
 } from '../data/currency';
 import { delay } from 'rxjs';
+import { Root } from '../data/currencies-request-body';
 
 @Injectable({
   providedIn: 'root',
@@ -127,22 +128,6 @@ export class ExchangeService {
     console.log(this.activeCurrenciesList);
   }
 
-  // updateLists1(data: Currency[]): void {
-  //   data.map((cur) => {
-  //     const { currency, description, status } = cur;
-  //     const firstCurToPush: Currency | undefined = this.currencyToAddCopy.find(
-  //       (c) => c.currency === currency
-  //     );
-  //     const secondCurToPush: Currency | undefined = this.currencyToAddCopy.find(
-  //       (c) => c.currency === currency
-  //     );
-  //     if (firstCurToPush !== undefined && secondCurToPush !== undefined) {
-  //       this.currencyLine1.currencies.push(firstCurToPush);
-  //       this.currencyLine2.currencies.push(secondCurToPush);
-  //     }
-  //   });
-  // }
-
   reverseCondition(currency: Currency): void {
     currency.status === StatusEnum.ACTIVE
       ? (currency.status = StatusEnum.NOT_AVAILABLE)
@@ -158,11 +143,11 @@ export class ExchangeService {
     if (currencyObj) {
       if (isLine1) {
         this.activeCurrency1 = currencyObj.currency;
-        // console.log(`active1: ${this.activeCurrency1}`);
+        console.log(`active1: ${this.activeCurrency1}`);
         return;
       }
       this.activeCurrency2 = currencyObj.currency;
-      // console.log(`active2: ${this.activeCurrency2}`);
+      console.log(`active2: ${this.activeCurrency2}`);
     }
   }
 
@@ -257,5 +242,19 @@ export class ExchangeService {
     }
 
     this.checkActive(currencyObj, !findLine2);
+  }
+
+  // Exchange functions
+
+  getUsdHrn(data: Root | any) {
+    return (1 / data.rates.USD).toFixed(2);
+  }
+
+  getEurHrn(data: Root | any) {
+    return (1 / data.rates.EUR).toFixed(2);
+  }
+
+  getGbpHrn(data: Root | any) {
+    return (1 / data.rates.GBP).toFixed(2);
   }
 }

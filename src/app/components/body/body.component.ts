@@ -29,11 +29,13 @@ export class BodyComponent implements OnInit {
   loading: boolean = false;
   data: Root | any;
 
+  // result = this.data?.rates
+
   ngOnInit(): void {
     this.loading = true;
     this.exchangeService.getCurrList(this.active2).subscribe((currencies) => {
       (this.data = currencies), (this.loading = false);
     });
-    // throw new Error('Method not implemented.');
+    throw new Error('Method not implemented.');
   }
 }

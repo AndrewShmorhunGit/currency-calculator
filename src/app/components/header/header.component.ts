@@ -13,15 +13,6 @@ export class HeaderComponent implements OnInit {
 
   loading: boolean = false;
   data: Root | any;
-  getUsdHrn() {
-    return (1 / this.data?.rates.USD).toFixed(2);
-  }
-
-  getEurHrn() {
-    return (1 / this.data.rates.EUR).toFixed(2);
-  }
-
-  exchangeResultFunction() {}
 
   ngOnInit(): void {
     this.loading = true;
