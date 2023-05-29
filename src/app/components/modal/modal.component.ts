@@ -15,8 +15,8 @@ export class ModalComponent {
     public exchangeService: ExchangeService
   ) {}
 
-  currencies: Currency[] = this.exchangeService.currencyToAdd;
-  tempCurrArray: Currency[] = [];
+  currencies: Currency[] = this.exchangeService.availableCurrencyArray;
+  tempCurrArray: string[] = [];
 
   prepareToAdd(currencyObj: Currency): Currency[] {
     if (currencyObj.status === StatusEnum.NOT_AVAILABLE) return this.currencies;
@@ -25,13 +25,13 @@ export class ModalComponent {
       currencyObj.status === StatusEnum.AVAILABLE
         ? (currencyObj.status = StatusEnum.ACTIVE)
         : (currencyObj.status = StatusEnum.AVAILABLE);
-      if (this.tempCurrArray.includes(currencyObj)) {
+      if (this.tempCurrArray.includes(currencyObj.currency)) {
         this.tempCurrArray = this.tempCurrArray.filter(
-          (curr) => curr !== currencyObj
+          (curr) => curr !== currencyObj.currency
         );
         return this.currencies;
       }
-      this.tempCurrArray.push(currencyObj);
+      this.tempCurrArray.push(currencyObj.currency);
     }
     console.log(this.tempCurrArray);
     return this.currencies;
@@ -40,8 +40,7 @@ export class ModalComponent {
   updateCurrencies() {
     this.currencies = this.currencies.map((curr) => {
       this.tempCurrArray.find((tempCurr) => {
-        if (curr.currency === tempCurr.currency)
-          curr.status = StatusEnum.NOT_AVAILABLE;
+        if (curr.currency === tempCurr) curr.status = StatusEnum.NOT_AVAILABLE;
       });
       return curr;
     });

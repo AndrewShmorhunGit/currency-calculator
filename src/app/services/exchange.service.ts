@@ -58,6 +58,15 @@ export class ExchangeService {
     'RUB',
   ];
 
+  availableCurrenciesList = this.getAvailableCurrenciesList();
+
+  getAvailableCurrenciesList(): string[] {
+    return this.allCurrenciesList.filter((c) => {
+      const curr = this.activeCurrenciesList.find((ac) => ac === c);
+      return c === curr;
+    });
+  }
+
   getAvailableCurrencies(): Currency[] {
     return this.allCurrenciesArray.filter((c) => {
       const curr = this.activeCurrenciesList.find((ac) => ac === c.currency);
