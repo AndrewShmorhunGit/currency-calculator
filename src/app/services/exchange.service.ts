@@ -5,6 +5,8 @@ import {
   StatusEnum,
   CurrencyLine,
   allCurrencies,
+  allCurrenciesCopy1,
+  allCurrenciesCopy2,
 } from '../data/currency';
 import { delay } from 'rxjs';
 
@@ -72,6 +74,10 @@ export class ExchangeService {
     this.activeCurrenciesList
   );
 
+  allCurrenciesArrayLine1 = allCurrenciesCopy1;
+
+  allCurrenciesArrayLine2 = allCurrenciesCopy2;
+
   availableCurrencyArray: Currency[] = this.getAvailableCurrencies(
     this.allCurrenciesArray,
     this.activeCurrenciesList
@@ -83,12 +89,26 @@ export class ExchangeService {
   );
 
   currencyLine1: CurrencyLine = {
-    currencies: this.activeCurrenciesArray,
+    currencies: this.getActiveCurrencies(
+      this.allCurrenciesArrayLine1,
+      this.activeCurrenciesList
+    ).map((c) => {
+      if (c.currency === 'USD') c.status = StatusEnum.ACTIVE;
+      if (c.currency === 'UAH') c.status = StatusEnum.NOT_AVAILABLE;
+      return c;
+    }),
     line: 1,
   };
 
   currencyLine2: CurrencyLine = {
-    currencies: this.activeCurrenciesArray,
+    currencies: this.getActiveCurrencies(
+      this.allCurrenciesArrayLine2,
+      this.activeCurrenciesList
+    ).map((c) => {
+      if (c.currency === 'UAH') c.status = StatusEnum.ACTIVE;
+      if (c.currency === 'USD') c.status = StatusEnum.NOT_AVAILABLE;
+      return c;
+    }),
     line: 2,
   };
 
@@ -104,6 +124,7 @@ export class ExchangeService {
 
   updateLists(list: string[]) {
     list.map((item) => this.activeCurrenciesList.push(item));
+    console.log(this.activeCurrenciesList);
   }
 
   // updateLists1(data: Currency[]): void {
