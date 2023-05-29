@@ -20,28 +20,37 @@ export class ExchangeService {
       .pipe(delay(1000));
   }
 
-  allCurrenciesArray: Currency[] = allCurrencies;
-
-  activeCurrenciesArray: Currency[] = this.getActiveCurrencies();
-
-  availableCurrencyArray: Currency[] = this.getAvailableCurrencies();
-
-  getActiveCurrencies(): Currency[] {
-    return this.allCurrenciesArray.filter((c) => {
-      const curr = this.activeCurrenciesList.find((ac) => ac === c.currency);
-      return c.currency === curr;
+  getAvailableCurrenciesList(
+    allCurrenciesList: string[],
+    activeCurrenciesList: string[]
+  ): string[] {
+    return allCurrenciesList.filter((c) => {
+      const curr = activeCurrenciesList.filter((ac) => ac === c);
+      return c === curr[0];
     });
   }
 
-  currencyLine1: CurrencyLine = {
-    currencies: this.activeCurrenciesArray,
-    line: 1,
-  };
+  getAvailableCurrencies(
+    allCurrenciesArray: Currency[],
+    activeCurrenciesList: string[]
+  ): Currency[] {
+    return allCurrenciesArray.filter((c) => {
+      const curr = activeCurrenciesList.filter((ac) => ac === c.currency);
+      return c.currency !== curr[0];
+    });
+  }
 
-  currencyLine2: CurrencyLine = {
-    currencies: this.activeCurrenciesArray,
-    line: 2,
-  };
+  getActiveCurrencies(
+    allCurrenciesArray: Currency[],
+    activeCurrenciesList: string[]
+  ): Currency[] {
+    return allCurrenciesArray.filter((c) => {
+      const curr = activeCurrenciesList.filter((ac) => ac === c.currency);
+      return c.currency === curr[0];
+    });
+  }
+
+  allCurrenciesArray: Currency[] = allCurrencies;
 
   activeCurrenciesList: string[] = ['USD', 'EUR', 'GBP', 'UAH'];
 
@@ -58,21 +67,30 @@ export class ExchangeService {
     'RUB',
   ];
 
-  availableCurrenciesList = this.getAvailableCurrenciesList();
+  activeCurrenciesArray: Currency[] = this.getActiveCurrencies(
+    this.allCurrenciesArray,
+    this.activeCurrenciesList
+  );
 
-  getAvailableCurrenciesList(): string[] {
-    return this.allCurrenciesList.filter((c) => {
-      const curr = this.activeCurrenciesList.find((ac) => ac === c);
-      return c === curr;
-    });
-  }
+  availableCurrencyArray: Currency[] = this.getAvailableCurrencies(
+    this.allCurrenciesArray,
+    this.activeCurrenciesList
+  );
 
-  getAvailableCurrencies(): Currency[] {
-    return this.allCurrenciesArray.filter((c) => {
-      const curr = this.activeCurrenciesList.find((ac) => ac === c.currency);
-      return c.currency !== curr;
-    });
-  }
+  availableCurrenciesList = this.getAvailableCurrenciesList(
+    this.allCurrenciesList,
+    this.activeCurrenciesList
+  );
+
+  currencyLine1: CurrencyLine = {
+    currencies: this.activeCurrenciesArray,
+    line: 1,
+  };
+
+  currencyLine2: CurrencyLine = {
+    currencies: this.activeCurrenciesArray,
+    line: 2,
+  };
 
   changeStatusToAvailable(currencyObj: Currency): void {
     currencyObj.status = StatusEnum.AVAILABLE;
@@ -84,7 +102,11 @@ export class ExchangeService {
     currencyObj.status = StatusEnum.ACTIVE;
   }
 
-  // updateLists(data: Currency[]): void {
+  updateLists(list: string[]) {
+    list.map((item) => this.activeCurrenciesList.push(item));
+  }
+
+  // updateLists1(data: Currency[]): void {
   //   data.map((cur) => {
   //     const { currency, description, status } = cur;
   //     const firstCurToPush: Currency | undefined = this.currencyToAddCopy.find(
