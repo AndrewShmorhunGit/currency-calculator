@@ -184,71 +184,42 @@ export class ExchangeService {
     this.activeCurrency2 = newActive1;
   }
 
+  checkIfLineOne(currencyObj: Currency): boolean {
+    return this.currencyLine1.find((obj) => obj === currencyObj) !== undefined
+      ? true
+      : false;
+  }
+
+  checkIfLineTwo(currencyObj: Currency): boolean {
+    return this.currencyLine2.find((obj) => obj === currencyObj) !== undefined
+      ? true
+      : false;
+  }
+
+  checkStatus(currencyObj: Currency): any {
+    if (currencyObj.status === undefined) {
+      throw new Error('Error. Can not defined status!');
+    }
+    if (currencyObj.status === StatusEnum.ACTIVE) {
+      return StatusEnum.ACTIVE;
+    }
+    if (currencyObj.status === StatusEnum.AVAILABLE) {
+      return StatusEnum.AVAILABLE;
+    }
+    if (currencyObj.status === StatusEnum.NOT_AVAILABLE) {
+      return StatusEnum.NOT_AVAILABLE;
+    }
+  }
+
   changeCurrencyStatus(currencyObj: Currency) {
-    const findLine1 = this.currencyLine1.find((obj) => obj === currencyObj);
-    const findLine2 = this.currencyLine2.find((obj) => obj === currencyObj);
+    const findLine1 = this.checkIfLineOne(currencyObj);
+    const findLine2 = this.checkIfLineTwo(currencyObj);
 
-    const activeInLine1 = this.currencyLine1.find(
-      (obj) => obj.status === StatusEnum.ACTIVE
-    );
-    const activeInLine2 = this.currencyLine2.find(
-      (obj) => obj.status === StatusEnum.ACTIVE
-    );
-
+    // can not select NOT_AVAILABLE
     if (currencyObj.status === StatusEnum.NOT_AVAILABLE) return;
 
-    if (currencyObj.status === StatusEnum.ACTIVE && findLine1) {
-      currencyObj.status = StatusEnum.ACTIVE;
-      this.changeStatusToAvailable(currencyObj);
-      this.currencyLine2.map((currency) => {
-        if (currency.status === StatusEnum.NOT_AVAILABLE)
-          this.changeStatusToAvailable(currency);
-      });
-    }
-    if (currencyObj.status === StatusEnum.ACTIVE && findLine2) {
-      currencyObj.status = StatusEnum.ACTIVE;
-      this.changeStatusToAvailable(currencyObj);
-      this.currencyLine1.map((currency) => {
-        if (currency.status === StatusEnum.NOT_AVAILABLE)
-          this.changeStatusToAvailable(currency);
-      });
-    }
-
-    if (
-      currencyObj.status === StatusEnum.AVAILABLE &&
-      !activeInLine1 &&
-      findLine1
-    ) {
-      currencyObj.status = StatusEnum.ACTIVE;
-      this.currencyLine2.map((currency) => {
-        if (
-          currency.status === StatusEnum.AVAILABLE &&
-          currencyObj.currency === currency.currency
-        )
-          this.changeStatusToNotAvailable(currency);
-      });
-    }
-
-    if (
-      currencyObj.status === StatusEnum.AVAILABLE &&
-      !activeInLine2 &&
-      findLine2
-    ) {
-      currencyObj.status = StatusEnum.ACTIVE;
-      this.currencyLine1.map((currency) => {
-        if (
-          currency.status === StatusEnum.AVAILABLE &&
-          currencyObj.currency === currency.currency
-        )
-          this.changeStatusToNotAvailable(currency);
-      });
-    }
-
-    if (
-      currencyObj.status === StatusEnum.AVAILABLE &&
-      activeInLine1 &&
-      findLine1
-    ) {
+    // select AVAILABLE in line 1
+    if (currencyObj.status === StatusEnum.AVAILABLE && findLine1) {
       currencyObj.status = StatusEnum.ACTIVE;
       this.currencyLine1.map((currency) => {
         if (
@@ -266,14 +237,12 @@ export class ExchangeService {
         if (currencyObj.currency === currency.currency) {
           this.changeStatusToNotAvailable(currency);
         }
+        return;
       });
     }
 
-    if (
-      currencyObj.status === StatusEnum.AVAILABLE &&
-      activeInLine2 &&
-      findLine2
-    ) {
+    // select AVAILABLE in line 2
+    if (currencyObj.status === StatusEnum.AVAILABLE && findLine2) {
       currencyObj.status = StatusEnum.ACTIVE;
       this.currencyLine2.map((currency) => {
         if (
@@ -292,6 +261,7 @@ export class ExchangeService {
           this.changeStatusToNotAvailable(currency);
         }
       });
+      return;
     }
 
     this.checkActive(currencyObj, !findLine2);
