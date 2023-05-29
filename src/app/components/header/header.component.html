@@ -3,7 +3,12 @@
     <p>{{ date | date }}</p>
   </div>
   <div class="header-container">
-    <p>1 USD - 38 UAH</p>
+    <p *ngIf="loading" class="loading-p">Loading...</p>
+    <p *ngIf="!loading">{{ "1 USD - " + getUsdHrn() + "  UAH" }}</p>
   </div>
-  <div class="header-container"><p>1 EUR - 40 UAH</p></div>
+  <div class="header-container">
+    <p *ngIf="loading" class="loading-p">Loading...</p>
+    <div></div>
+    <p *ngIf="!loading">{{ "1 EUR - " + getEurHrn() + "  UAH" }}</p>
+  </div>
 </div>

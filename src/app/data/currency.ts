@@ -11,6 +11,6 @@ export interface Currency {
 }
 
 export interface AddCurrency {
-  currency: '+';
+  currency: string;
   description?: 'add';
 }
