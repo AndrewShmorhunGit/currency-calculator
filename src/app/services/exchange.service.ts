@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Currency, StatusEnum } from '../data/currency';
+import {
+  Currency,
+  StatusEnum,
+  CurrencyLine,
+  allCurrencies,
+} from '../data/currency';
 import { delay } from 'rxjs';
 
 @Injectable({
@@ -15,117 +20,50 @@ export class ExchangeService {
       .pipe(delay(1000));
   }
 
-  currencyToAdd = [
-    {
-      currency: 'AUD',
-      description: 'australian dollar',
-      status: StatusEnum.AVAILABLE,
-    },
-    {
-      currency: 'CAD',
-      description: 'canadian dollar',
-      status: StatusEnum.AVAILABLE,
-    },
-    {
-      currency: 'IDR',
-      description: 'indian rupee',
-      status: StatusEnum.AVAILABLE,
-    },
-    {
-      currency: 'JPY',
-      description: 'japanese yen',
-      status: StatusEnum.AVAILABLE,
-    },
-    {
-      currency: 'PLN',
-      description: 'polish zloty',
-      status: StatusEnum.AVAILABLE,
-    },
-    {
-      currency: 'RUB',
-      description: 'russian ruble',
-      status: StatusEnum.AVAILABLE,
-    },
+  allCurrenciesArray: Currency[] = allCurrencies;
+
+  activeCurrenciesArray: Currency[] = this.getActiveCurrencies();
+
+  availableCurrencyArray: Currency[] = this.getAvailableCurrencies();
+
+  getActiveCurrencies(): Currency[] {
+    return this.allCurrenciesArray.filter((c) => {
+      const curr = this.activeCurrenciesList.find((ac) => ac === c.currency);
+      return c.currency === curr;
+    });
+  }
+
+  currencyLine1: CurrencyLine = {
+    currencies: this.activeCurrenciesArray,
+    line: 1,
+  };
+
+  currencyLine2: CurrencyLine = {
+    currencies: this.activeCurrenciesArray,
+    line: 2,
+  };
+
+  activeCurrenciesList: string[] = ['USD', 'EUR', 'GBP', 'UAH'];
+
+  allCurrenciesList = [
+    'USD',
+    'EUR',
+    'GBP',
+    'UAH',
+    'AUD',
+    'CAD',
+    'IDR',
+    'JPY',
+    'PLN',
+    'RUB',
   ];
 
-  currencyToAddCopy = [
-    {
-      currency: 'AUD',
-      description: 'australian dollar',
-      status: StatusEnum.AVAILABLE,
-    },
-    {
-      currency: 'CAD',
-      description: 'canadian dollar',
-      status: StatusEnum.AVAILABLE,
-    },
-    {
-      currency: 'IDR',
-      description: 'indian rupee',
-      status: StatusEnum.AVAILABLE,
-    },
-    {
-      currency: 'JPY',
-      description: 'japanese yen',
-      status: StatusEnum.AVAILABLE,
-    },
-    {
-      currency: 'PLN',
-      description: 'polish zloty',
-      status: StatusEnum.AVAILABLE,
-    },
-    {
-      currency: 'RUB',
-      description: 'russian ruble',
-      status: StatusEnum.AVAILABLE,
-    },
-  ];
-
-  currencyLine1: Currency[] = [
-    {
-      currency: 'USD',
-      description: 'united states dollar',
-      status: StatusEnum.ACTIVE,
-    },
-    {
-      currency: 'EUR',
-      description: 'euro',
-      status: StatusEnum.AVAILABLE,
-    },
-    {
-      currency: 'GBP',
-      description: 'great britain pound',
-      status: StatusEnum.AVAILABLE,
-    },
-    {
-      currency: 'UAH',
-      description: 'Ukrainian hryvnia',
-      status: StatusEnum.NOT_AVAILABLE,
-    },
-  ];
-
-  currencyLine2: Currency[] = [
-    {
-      currency: 'USD',
-      description: 'united states dollar',
-      status: StatusEnum.NOT_AVAILABLE,
-    },
-    {
-      currency: 'EUR',
-      description: 'euro',
-      status: StatusEnum.AVAILABLE,
-    },
-    {
-      currency: 'GBP',
-      description: 'great britain pound',
-      status: StatusEnum.AVAILABLE,
-    },
-    {
-      currency: 'UAH',
-      description: 'Ukrainian hryvnia',
-      status: StatusEnum.ACTIVE,
-    },
-  ];
+  getAvailableCurrencies(): Currency[] {
+    return this.allCurrenciesArray.filter((c) => {
+      const curr = this.activeCurrenciesList.find((ac) => ac === c.currency);
+      return c.currency !== curr;
+    });
+  }
 
   changeStatusToAvailable(currencyObj: Currency): void {
     currencyObj.status = StatusEnum.AVAILABLE;
@@ -137,18 +75,21 @@ export class ExchangeService {
     currencyObj.status = StatusEnum.ACTIVE;
   }
 
-  updateLists(data: Currency[]): void {
-    data.map((cur) => {
-      const { currency, description, status } = cur;
-      const curToPush: Currency | undefined = this.currencyToAddCopy.find(
-        (c) => c.currency === currency
-      );
-      if (curToPush !== undefined) {
-        this.currencyLine1.push(curToPush);
-        this.currencyLine2.push(curToPush);
-      }
-    });
-  }
+  // updateLists(data: Currency[]): void {
+  //   data.map((cur) => {
+  //     const { currency, description, status } = cur;
+  //     const firstCurToPush: Currency | undefined = this.currencyToAddCopy.find(
+  //       (c) => c.currency === currency
+  //     );
+  //     const secondCurToPush: Currency | undefined = this.currencyToAddCopy.find(
+  //       (c) => c.currency === currency
+  //     );
+  //     if (firstCurToPush !== undefined && secondCurToPush !== undefined) {
+  //       this.currencyLine1.currencies.push(firstCurToPush);
+  //       this.currencyLine2.currencies.push(secondCurToPush);
+  //     }
+  //   });
+  // }
 
   reverseCondition(currency: Currency): void {
     currency.status === StatusEnum.ACTIVE
@@ -178,22 +119,22 @@ export class ExchangeService {
       this.activeCurrency1,
       this.activeCurrency2,
     ];
-    this.currencyLine1.map((currency) => this.reverseCondition(currency));
-    this.currencyLine2.map((currency) => this.reverseCondition(currency));
+    this.currencyLine1.currencies.map((currency) =>
+      this.reverseCondition(currency)
+    );
+    this.currencyLine2.currencies.map((currency) =>
+      this.reverseCondition(currency)
+    );
     this.activeCurrency1 = newActive2;
     this.activeCurrency2 = newActive1;
   }
 
-  checkIfLineOne(currencyObj: Currency): boolean {
-    return this.currencyLine1.find((obj) => obj === currencyObj) !== undefined
-      ? true
-      : false;
+  checkIfLineOne(currencyLine: CurrencyLine): boolean {
+    return this.currencyLine1.line === currencyLine.line ? true : false;
   }
 
-  checkIfLineTwo(currencyObj: Currency): boolean {
-    return this.currencyLine2.find((obj) => obj === currencyObj) !== undefined
-      ? true
-      : false;
+  checkIfLineTwo(currencyLine: CurrencyLine): boolean {
+    return this.currencyLine2.line === currencyLine.line ? true : false;
   }
 
   checkStatus(currencyObj: Currency): any {
@@ -211,24 +152,25 @@ export class ExchangeService {
     }
   }
 
-  changeCurrencyStatus(currencyObj: Currency) {
-    const findLine1 = this.checkIfLineOne(currencyObj);
-    const findLine2 = this.checkIfLineTwo(currencyObj);
+  changeCurrencyStatus(currencyObj: Currency, currencyLine: CurrencyLine) {
+    const findLine1 = this.checkIfLineOne(currencyLine);
+    const findLine2 = this.checkIfLineTwo(currencyLine);
 
     // can not select NOT_AVAILABLE
     if (currencyObj.status === StatusEnum.NOT_AVAILABLE) return;
 
     // select AVAILABLE in line 1
     if (currencyObj.status === StatusEnum.AVAILABLE && findLine1) {
-      currencyObj.status = StatusEnum.ACTIVE;
-      this.currencyLine1.map((currency) => {
+      this.currencyLine1.currencies.map((cur) => {
         if (
-          currency.status === StatusEnum.ACTIVE &&
-          currencyObj.currency !== currency.currency
-        )
-          this.changeStatusToAvailable(currency);
+          cur.status === StatusEnum.ACTIVE &&
+          currencyObj.currency !== cur.currency
+        ) {
+          this.changeStatusToAvailable(cur);
+          currencyObj.status = StatusEnum.ACTIVE;
+        }
       });
-      this.currencyLine2.map((currency) => {
+      this.currencyLine2.currencies.map((currency) => {
         if (
           currency.status === StatusEnum.NOT_AVAILABLE &&
           currencyObj.currency !== currency.currency
@@ -237,21 +179,20 @@ export class ExchangeService {
         if (currencyObj.currency === currency.currency) {
           this.changeStatusToNotAvailable(currency);
         }
-        return;
       });
     }
 
     // select AVAILABLE in line 2
     if (currencyObj.status === StatusEnum.AVAILABLE && findLine2) {
       currencyObj.status = StatusEnum.ACTIVE;
-      this.currencyLine2.map((currency) => {
+      this.currencyLine2.currencies.map((currency) => {
         if (
           currency.status === StatusEnum.ACTIVE &&
           currencyObj.currency !== currency.currency
         )
           this.changeStatusToAvailable(currency);
       });
-      this.currencyLine1.map((currency) => {
+      this.currencyLine1.currencies.map((currency) => {
         if (
           currency.status === StatusEnum.NOT_AVAILABLE &&
           currencyObj.currency !== currency.currency
@@ -261,7 +202,6 @@ export class ExchangeService {
           this.changeStatusToNotAvailable(currency);
         }
       });
-      return;
     }
 
     this.checkActive(currencyObj, !findLine2);

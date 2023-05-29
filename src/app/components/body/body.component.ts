@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Root } from 'src/app/data/currencies-request-body';
 // import { CurrencyEnum } from 'src/app/data/currencies';
-import { Currency, StatusEnum } from 'src/app/data/currency';
+import { Currency, CurrencyLine, StatusEnum } from 'src/app/data/currency';
 import { ExchangeService } from 'src/app/services/exchange.service';
 import { ModalService } from 'src/app/services/modal.service';
 
@@ -21,8 +21,8 @@ export class BodyComponent implements OnInit {
   active1 = this.exchangeService.activeCurrency1;
   active2 = this.exchangeService.activeCurrency2;
 
-  curArr1: Currency[] = this.exchangeService.currencyLine1;
-  curArr2: Currency[] = this.exchangeService.currencyLine2;
+  curArr1: CurrencyLine = this.exchangeService.currencyLine1;
+  curArr2: CurrencyLine = this.exchangeService.currencyLine2;
 
   value: number = 1;
 

@@ -1,9 +1,9 @@
 <div class="body-container">
   <div class="main-currency-container container-secondary center">
     <app-currency
-      *ngFor="let currencyObj1 of curArr1"
+      *ngFor="let currencyObj1 of curArr1.currencies"
       [currencyObj]="currencyObj1"
-      (click)="exchangeService.changeCurrencyStatus(currencyObj1)"
+      (click)="exchangeService.changeCurrencyStatus(currencyObj1, curArr1)"
     >
     </app-currency>
 
@@ -16,9 +16,9 @@
   </div>
   <div class="convert-to-container container-secondary center">
     <app-currency
-      *ngFor="let currencyObj2 of curArr2"
+      *ngFor="let currencyObj2 of curArr2.currencies"
       [currencyObj]="currencyObj2"
-      (click)="exchangeService.changeCurrencyStatus(currencyObj2)"
+      (click)="exchangeService.changeCurrencyStatus(currencyObj2, curArr2)"
     >
     </app-currency>
   </div>
@@ -57,7 +57,7 @@
       <p *ngIf="loading" class="loading-p">Loading</p>
       <div *ngIf="loading" class="loading-decorator"></div>
       <p class="result-paragraph">
-        {{ +exchangeService.activeCurrency2 }}
+        {{ 123 + exchangeService.activeCurrency2 }}
       </p>
     </div>
   </div>
