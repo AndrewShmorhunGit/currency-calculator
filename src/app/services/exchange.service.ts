@@ -55,9 +55,20 @@ export class ExchangeService {
 
   allCurrenciesArray: Currency[] = allCurrencies;
 
-  activeCurrenciesList: string[] = ['USD', 'EUR', 'GBP', 'UAH'];
+  activeCurrenciesList: string[] = [
+    'USD',
+    'EUR',
+    'GBP',
+    'UAH',
+    'AUD',
+    'CAD',
+    'IDR',
+    'JPY',
+    'PLN',
+    'RUB',
+  ];
 
-  allCurrenciesList = [
+  allCurrenciesList: string[] = [
     'USD',
     'EUR',
     'GBP',

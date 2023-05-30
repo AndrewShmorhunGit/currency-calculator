@@ -27,7 +27,32 @@
   background-color: #f1f3f5;
   border-radius: 1.2rem;
   justify-content: space-between;
-  padding: 2rem 12rem;
+  gap: 2rem;
+  padding: 2rem 4rem;
+}
+
+.relative {
+  position: relative;
+}
+
+.line_1,
+.line_2 {
+  overflow-x: scroll;
+  &::-webkit-scrollbar {
+    height: 1.2rem;
+    width: 0.4rem;
+  }
+  &::-webkit-scrollbar-track {
+    background: #e9f8f5;
+    border-bottom-right-radius: 1.2rem;
+    border-bottom-left-radius: 1.2rem;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #8ce99a;
+    opacity: 90%;
+    border-radius: 1.2rem;
+    border: 1px solid #868e96;
+  }
 }
 
 .round-container {
