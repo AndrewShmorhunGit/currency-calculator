@@ -5,13 +5,14 @@
 }
 
 .main-container {
-  padding: 2rem 12rem;
+  padding: 4rem 12rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
 
 .main-header {
+  padding: 2rem;
   font-size: 3.6rem;
   color: #f8f9fa;
   font-weight: 400;

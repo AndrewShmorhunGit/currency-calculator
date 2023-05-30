@@ -5,14 +5,17 @@
   <div class="header-container">
     <p *ngIf="loading" class="loading-p">Loading...</p>
     <p *ngIf="!loading">
-      {{ "1 USD - " + this.exchangeService.getUsdHrn(data) + "  UAH" }}
+      {{ "USD - " + this.exchangeService.getUsdHrn(data) + "  UAH" }}
     </p>
   </div>
   <div class="header-container">
     <p *ngIf="loading" class="loading-p">Loading...</p>
     <div></div>
     <p *ngIf="!loading">
-      {{ "1 EUR - " + this.exchangeService.getEurHrn(data) + "  UAH" }}
+      {{ "EUR - " + this.exchangeService.getEurHrn(data) + "  UAH" }}
     </p>
+  </div>
+  <div class="header-container">
+    <p>{{ time | date : "hh:mm:ss a" }}</p>
   </div>
 </div>

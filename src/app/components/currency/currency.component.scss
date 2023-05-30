@@ -36,4 +36,8 @@
 .currency_disabled:hover {
   color: grey;
   background-color: #f1f3f5;
+  transform: scale(1);
+  transform: translateY(0rem);
+  box-shadow: none;
+  cursor: not-allowed;
 }
