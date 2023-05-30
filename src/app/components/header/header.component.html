@@ -1,21 +1,21 @@
 <div class="header center">
-  <div class="header-container">
+  <div class="header-container date">
     <p>{{ date | date }}</p>
   </div>
-  <div class="header-container">
+  <div class="header-container usd">
     <p *ngIf="loading" class="loading-p">Loading...</p>
     <p *ngIf="!loading">
       {{ "USD - " + this.exchangeService.getUsdHrn(data) + "  UAH" }}
     </p>
   </div>
-  <div class="header-container">
+  <div class="header-container euro">
     <p *ngIf="loading" class="loading-p">Loading...</p>
     <div></div>
     <p *ngIf="!loading">
       {{ "EUR - " + this.exchangeService.getEurHrn(data) + "  UAH" }}
     </p>
   </div>
-  <div class="header-container">
+  <div class="header-container time">
     <p>{{ time | date : "hh:mm:ss a" }}</p>
   </div>
 </div>

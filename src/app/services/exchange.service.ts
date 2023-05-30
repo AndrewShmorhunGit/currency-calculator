@@ -55,18 +55,7 @@ export class ExchangeService {
 
   allCurrenciesArray: Currency[] = allCurrencies;
 
-  activeCurrenciesList: string[] = [
-    'USD',
-    'EUR',
-    'GBP',
-    'UAH',
-    'AUD',
-    'CAD',
-    'IDR',
-    'JPY',
-    'PLN',
-    'RUB',
-  ];
+  activeCurrenciesList: string[] = ['USD', 'EUR', 'GBP', 'UAH', 'PLN', 'RUB'];
 
   allCurrenciesList: string[] = [
     'USD',
@@ -267,8 +256,13 @@ export class ExchangeService {
 
   // Exchange calculator function
 
-  currCalc(data: Root | any, active1: string): number {
+  currCalc(
+    data: Root | any,
+    active1: string,
+    active2: string = 'UAH',
+    multiply: number
+  ): number {
     const list = data.rates;
-    return 1 / list[active1];
+    return multiply / list[active1];
   }
 }

@@ -23,3 +23,17 @@
   padding-top: 6rem;
   color: #f8f9fa;
 }
+
+@media (max-width: 100em) {
+  .main-container {
+    padding: 3.2rem 6rem;
+    gap: 1.6rem;
+  }
+}
+
+@media (max-width: 62.5em) {
+  .main-container {
+    padding: 2.4rem 4rem;
+    gap: 1.2rem;
+  }
+}

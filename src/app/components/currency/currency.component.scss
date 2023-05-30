@@ -41,3 +41,18 @@
   box-shadow: none;
   cursor: not-allowed;
 }
+
+@media (max-width: 62.5em) {
+  .currency {
+    transform: scale(0.9);
+    &:hover {
+      transform: scale(0.95);
+    }
+  }
+
+  .currency_disabled:hover {
+    &:hover {
+      transform: scale(0.9);
+    }
+  }
+}

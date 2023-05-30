@@ -16,22 +16,20 @@ export class BodyComponent implements OnInit {
   ) {}
 
   date = new Date().toString();
-
-  active1 = this.exchangeService.activeCurrency1;
-  active2 = this.exchangeService.activeCurrency2;
-
-  curArr1: CurrencyLine = this.exchangeService.currencyLine1;
-  curArr2: CurrencyLine = this.exchangeService.currencyLine2;
-
-  value: number = 1;
-
+  input: number = 1;
   loading: boolean = false;
   data: Root | any;
 
+  getCurArr(curArr: CurrencyLine) {
+    return curArr.currencies;
+  }
+
   ngOnInit(): void {
     this.loading = true;
-    this.exchangeService.getCurrList(this.active2).subscribe((currencies) => {
-      (this.data = currencies), (this.loading = false);
-    });
+    this.exchangeService
+      .getCurrList(this.exchangeService.activeCurrency2)
+      .subscribe((currencies) => {
+        (this.data = currencies), (this.loading = false);
+      });
   }
 }
