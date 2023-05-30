@@ -7,6 +7,8 @@ import {
   allCurrencies,
   allCurrenciesCopy1,
   allCurrenciesCopy2,
+  activeCurrenciesList,
+  allCurrenciesList,
 } from '../data/currency';
 import { delay } from 'rxjs';
 import { Root } from '../data/currencies-request-body';
@@ -20,7 +22,7 @@ export class ExchangeService {
   getCurrList(currency: string) {
     return this.http
       .get(`https://api.exchangerate.host/latest?base=${currency}`)
-      .pipe(delay(1000));
+      .pipe(delay(0));
   }
 
   getAvailableCurrenciesList(
@@ -55,20 +57,9 @@ export class ExchangeService {
 
   allCurrenciesArray: Currency[] = allCurrencies;
 
-  activeCurrenciesList: string[] = ['USD', 'EUR', 'GBP', 'UAH', 'PLN', 'RUB'];
+  activeCurrenciesList: string[] = activeCurrenciesList;
 
-  allCurrenciesList: string[] = [
-    'USD',
-    'EUR',
-    'GBP',
-    'UAH',
-    'AUD',
-    'CAD',
-    'IDR',
-    'JPY',
-    'PLN',
-    'RUB',
-  ];
+  allCurrenciesList: string[] = allCurrenciesList;
 
   activeCurrenciesArray: Currency[] = this.getActiveCurrencies(
     this.allCurrenciesArray,
@@ -123,7 +114,7 @@ export class ExchangeService {
     currencyObj.status = StatusEnum.ACTIVE;
   }
 
-  updateLists(list: string[]) {
+  updateLists(list: string[]): void {
     list.map((item) => this.activeCurrenciesList.push(item));
     console.log(this.activeCurrenciesList);
   }

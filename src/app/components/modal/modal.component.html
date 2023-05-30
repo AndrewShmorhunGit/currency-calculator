@@ -3,7 +3,7 @@
   <h2 class="modal-title">add currencies</h2>
   <div class="currencies-container">
     <app-currency
-      *ngFor="let currencyObj of currencies"
+      *ngFor="let currencyObj of exchangeService.availableCurrencyArray"
       [currencyObj]="currencyObj"
       (click)="prepareToAdd(currencyObj)"
     >

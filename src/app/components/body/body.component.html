@@ -2,14 +2,12 @@
   <div class="relative">
     <div class="main-currency-container line_1 container-secondary center">
       <app-currency
-        *ngFor="
-          let currencyObj1 of this.getCurArr(this.exchangeService.currencyLine1)
-        "
+        *ngFor="let currencyObj1 of exchangeService.currencyLine1.currencies"
         [currencyObj]="currencyObj1"
         (click)="
           exchangeService.changeCurrencyStatus(
             currencyObj1,
-            this.exchangeService.currencyLine1
+            exchangeService.currencyLine1
           )
         "
       >
@@ -25,14 +23,12 @@
   </div>
   <div class="convert-to-container line_2 container-secondary center">
     <app-currency
-      *ngFor="
-        let currencyObj2 of this.getCurArr(this.exchangeService.currencyLine2)
-      "
+      *ngFor="let currencyObj2 of exchangeService.currencyLine2.currencies"
       [currencyObj]="currencyObj2"
       (click)="
         exchangeService.changeCurrencyStatus(
           currencyObj2,
-          this.exchangeService.currencyLine2
+          exchangeService.currencyLine2
         )
       "
     >
@@ -69,19 +65,19 @@
         </g>
       </svg>
     </div>
-    <div class="result-container center">
+    <div class="result-container center laine_1">
       <p *ngIf="loading" class="loading-p center">Loading..</p>
       <div *ngIf="!loading" class="loading-decorator"></div>
       <p class="result-paragraph">
         {{
-          this.exchangeService
+          exchangeService
             .currCalc(
               data,
-              this.exchangeService.activeCurrency1,
-              this.exchangeService.activeCurrency2,
-              this.input
+              exchangeService.activeCurrency1,
+              exchangeService.activeCurrency2,
+              input
             )
-            .toFixed(2) + this.exchangeService.activeCurrency2
+            .toFixed(2) + exchangeService.activeCurrency2
         }}
       </p>
     </div>

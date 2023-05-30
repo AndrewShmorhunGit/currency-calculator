@@ -15,11 +15,11 @@ export class ModalComponent {
     public exchangeService: ExchangeService
   ) {}
 
-  currencies: Currency[] = this.exchangeService.availableCurrencyArray;
   tempCurrList: string[] = [];
 
   prepareToAdd(currencyObj: Currency): Currency[] {
-    if (currencyObj.status === StatusEnum.NOT_AVAILABLE) return this.currencies;
+    if (currencyObj.status === StatusEnum.NOT_AVAILABLE)
+      return this.exchangeService.availableCurrencyArray;
 
     if (currencyObj) {
       currencyObj.status === StatusEnum.AVAILABLE
@@ -29,20 +29,22 @@ export class ModalComponent {
         this.tempCurrList = this.tempCurrList.filter(
           (curr) => curr !== currencyObj.currency
         );
-        return this.currencies;
+        return this.exchangeService.availableCurrencyArray;
       }
       this.tempCurrList.push(currencyObj.currency);
     }
     console.log(this.tempCurrList);
-    return this.currencies;
+    return this.exchangeService.availableCurrencyArray;
   }
 
   updateCurrencies() {
-    this.currencies = this.currencies.map((curr) => {
-      this.tempCurrList.find((tempCurr) => {
-        if (curr.currency === tempCurr) curr.status = StatusEnum.NOT_AVAILABLE;
+    this.exchangeService.availableCurrencyArray =
+      this.exchangeService.availableCurrencyArray.map((curr) => {
+        this.tempCurrList.find((tempCurr) => {
+          if (curr.currency === tempCurr)
+            curr.status = StatusEnum.NOT_AVAILABLE;
+        });
+        return curr;
       });
-      return curr;
-    });
   }
 }

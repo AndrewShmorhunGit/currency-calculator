@@ -178,3 +178,25 @@ export const allCurrenciesCopy2: Currency[] = [
     status: StatusEnum.AVAILABLE,
   },
 ];
+
+export const activeCurrenciesList: string[] = [
+  'USD',
+  'EUR',
+  'GBP',
+  'UAH',
+  'PLN',
+  'RUB',
+];
+
+export const allCurrenciesList: string[] = [
+  'USD',
+  'EUR',
+  'GBP',
+  'UAH',
+  'AUD',
+  'CAD',
+  'IDR',
+  'JPY',
+  'PLN',
+  'RUB',
+];
