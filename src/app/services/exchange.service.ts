@@ -22,7 +22,7 @@ export class ExchangeService {
   getCurrList(currency: string) {
     return this.http
       .get(`https://api.exchangerate.host/latest?base=${currency}`)
-      .pipe(delay(0));
+      .pipe(delay(500));
   }
 
   getAvailableCurrenciesList(

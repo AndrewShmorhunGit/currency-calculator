@@ -10,7 +10,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { BodyComponent } from './components/body/body.component';
 import { FormsModule } from '@angular/forms';
 import { ModalComponent } from './components/modal/modal.component';
-import { FilterCurrenciesPipe } from './pipes/filter-currencies.pipe';
 
 @NgModule({
   declarations: [
@@ -20,7 +19,6 @@ import { FilterCurrenciesPipe } from './pipes/filter-currencies.pipe';
     AddCurrencyComponent,
     BodyComponent,
     ModalComponent,
-    FilterCurrenciesPipe,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],

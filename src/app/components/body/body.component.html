@@ -36,7 +36,7 @@
   </div>
 
   <div class="result-mian-container container-secondary center">
-    <div class="result-container center">
+    <div class="result-container input-container center">
       <label for="#amount">{{ exchangeService.activeCurrency1 }} Amount:</label>
       <input type="number" id="#amount" [(ngModel)]="input" />
     </div>
@@ -65,10 +65,10 @@
         </g>
       </svg>
     </div>
-    <div class="result-container center laine_1">
-      <p *ngIf="loading" class="loading-p center">Loading..</p>
-      <div *ngIf="!loading" class="loading-decorator"></div>
-      <p class="result-paragraph">
+    <div class="result-container result line_1">
+      <p *ngIf="loading" class="loading-p">Loading..</p>
+
+      <p *ngIf="!loading" class="result-paragraph">
         {{
           exchangeService
             .currCalc(
