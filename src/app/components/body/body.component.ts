@@ -16,9 +16,6 @@ export class BodyComponent implements OnInit {
     public exchangeService: ExchangeService
   ) {}
 
-  // line1: CurrencyLine = this.exchangeService.currencyLine1;
-  // line2: CurrencyLine = this.exchangeService.currencyLine2;
-
   input: number = 1;
   loading: boolean = false;
   data: Root | any;
@@ -29,9 +26,7 @@ export class BodyComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(`1 ${this.loading}`);
     this.loading = true;
-
     this.exchangeService
       .getCurrList(this.exchangeService.activeCurrency2)
       .subscribe((currencies) => {

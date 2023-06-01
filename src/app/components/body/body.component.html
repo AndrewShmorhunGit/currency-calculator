@@ -39,7 +39,7 @@
   <div class="result-mian-container container-secondary center">
     <div class="result-container input-container center">
       <label for="#amount">{{ exchangeService.activeCurrency1 }} Amount:</label>
-      <input type="number" id="#amount" [(ngModel)]="input" />
+      <input type="number" name="input" id="#amount" [(ngModel)]="input" />
     </div>
     <div
       class="equality-container round-container center"
@@ -71,7 +71,7 @@
       <p class="result-paragraph">
         {{
           loading === false
-            ? exchangeService
+            ? (exchangeService
                 .currCalc(
                   data,
                   exchangeService.activeCurrency1,
@@ -79,7 +79,8 @@
                   input,
                   reverse
                 )
-                .toFixed(2) + exchangeService.activeCurrency2
+                .toFixed(2) | number : "1.2-4") +
+              exchangeService.activeCurrency2
             : "Loading.."
         }}
       </p>

@@ -10,17 +10,8 @@ import { ExchangeService } from 'src/app/services/exchange.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  constructor(public exchangeService: ExchangeService) {
-    // setInterval(() => this.time, 350);
-  }
+  constructor(public exchangeService: ExchangeService) {}
   private $inActive = new Subject<boolean>();
-  ngOnInit(): void {
-    this.startClock;
-    this.loading = true;
-    this.exchangeService.getCurrList('UAH').subscribe((currencies) => {
-      (this.loading = false), console.log(currencies), (this.data = currencies);
-    });
-  }
 
   date = new Date().toString();
   time = new Date();
@@ -39,5 +30,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.$inActive.next(true);
     this.$inActive.unsubscribe();
+  }
+
+  ngOnInit(): void {
+    this.startClock();
+    this.loading = true;
+    this.exchangeService.getCurrList('UAH').subscribe((currencies) => {
+      (this.loading = false), console.log(currencies), (this.data = currencies);
+    });
   }
 }
