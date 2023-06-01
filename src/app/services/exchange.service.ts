@@ -70,6 +70,9 @@ export class ExchangeService {
 
   allCurrenciesArrayLine2 = allCurrenciesCopy2;
 
+  activeCurrency1: string = 'USD';
+  activeCurrency2: string = 'UAH';
+
   availableCurrencyArray: Currency[] = this.getAvailableCurrencies(
     this.allCurrenciesArray,
     this.activeCurrenciesList
@@ -80,27 +83,53 @@ export class ExchangeService {
     this.activeCurrenciesList
   );
 
-  currencyLine1: CurrencyLine = {
-    currencies: this.getActiveCurrencies(
-      this.allCurrenciesArrayLine1,
-      this.activeCurrenciesList
+  currenciesOfLine1 = this.getActiveCurrencies(
+    this.allCurrenciesArrayLine1,
+    this.activeCurrenciesList
+  ).map((c) => {
+    if (c.currency === 'USD') c.status = StatusEnum.ACTIVE;
+    if (c.currency === 'UAH') c.status = StatusEnum.NOT_AVAILABLE;
+    return c;
+  });
+
+  currenciesOfLine(
+    allCurrArrLine: Currency[],
+    allActiveCurrenciesList: string[],
+    active1: string,
+    active2: string,
+    line: number
+  ): Currency[] {
+    return this.getActiveCurrencies(
+      allCurrArrLine,
+      allActiveCurrenciesList
     ).map((c) => {
-      if (c.currency === 'USD') c.status = StatusEnum.ACTIVE;
-      if (c.currency === 'UAH') c.status = StatusEnum.NOT_AVAILABLE;
+      if (c.currency === (line === 1 ? active1 : active2))
+        c.status = StatusEnum.ACTIVE;
+      if (c.currency === (line === 1 ? active2 : active1))
+        c.status = StatusEnum.NOT_AVAILABLE;
       return c;
-    }),
+    });
+  }
+
+  currencyLine1: CurrencyLine = {
+    currencies: this.currenciesOfLine(
+      this.allCurrenciesArrayLine1,
+      this.activeCurrenciesList,
+      this.activeCurrency1,
+      this.activeCurrency2,
+      1
+    ),
     line: 1,
   };
 
   currencyLine2: CurrencyLine = {
-    currencies: this.getActiveCurrencies(
+    currencies: this.currenciesOfLine(
       this.allCurrenciesArrayLine2,
-      this.activeCurrenciesList
-    ).map((c) => {
-      if (c.currency === 'UAH') c.status = StatusEnum.ACTIVE;
-      if (c.currency === 'USD') c.status = StatusEnum.NOT_AVAILABLE;
-      return c;
-    }),
+      this.activeCurrenciesList,
+      this.activeCurrency1,
+      this.activeCurrency2,
+      2
+    ),
     line: 2,
   };
 
@@ -117,6 +146,29 @@ export class ExchangeService {
   updateLists(list: string[]): void {
     list.map((item) => this.activeCurrenciesList.push(item));
     console.log(this.activeCurrenciesList);
+
+    (this.currencyLine1 = {
+      ...this.currencyLine1,
+      currencies: this.currenciesOfLine(
+        this.allCurrenciesArrayLine1,
+        this.activeCurrenciesList,
+        this.activeCurrency1,
+        this.activeCurrency2,
+        1
+      ),
+    }),
+      console.log(this.currencyLine1.currencies);
+    (this.currencyLine2 = {
+      ...this.currencyLine2,
+      currencies: this.currenciesOfLine(
+        this.allCurrenciesArrayLine2,
+        this.activeCurrenciesList,
+        this.activeCurrency1,
+        this.activeCurrency2,
+        2
+      ),
+    }),
+      console.log(this.currencyLine2.currencies);
   }
 
   reverseCondition(currency: Currency): void {
@@ -126,9 +178,6 @@ export class ExchangeService {
       ? (currency.status = StatusEnum.ACTIVE)
       : StatusEnum.AVAILABLE;
   }
-
-  activeCurrency1: string = 'USD';
-  activeCurrency2: string = 'UAH';
 
   checkActive(currencyObj: Currency, isLine1: boolean): void {
     if (currencyObj) {
@@ -251,9 +300,13 @@ export class ExchangeService {
     data: Root | any,
     active1: string,
     active2: string = 'UAH',
-    multiply: number
+    multiply: number,
+    reverse: boolean
   ): number {
     const list = data.rates;
-    return multiply / list[active1];
+    if (!reverse) {
+      return multiply / list[active1];
+    }
+    return multiply / list[active2];
   }
 }

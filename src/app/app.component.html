@@ -6,7 +6,8 @@
   </div>
 
   <p class="footer center">
-    Developed and design with Angular by Andrew Shmorgun. All rights reserved.
-    May 2023.
+    &copy; Developed and design with Angular by Andrew Shmorgun. All rights
+    reserved. May 2023.
   </p>
+  <app-modal *ngIf="this.modalService.isVisible$ | async"></app-modal>
 </div>

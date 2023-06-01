@@ -31,6 +31,7 @@
           exchangeService.currencyLine2
         )
       "
+      (click)="refresh()"
     >
     </app-currency>
   </div>
@@ -43,6 +44,7 @@
     <div
       class="equality-container round-container center"
       (click)="exchangeService.reverseStatus()"
+      (click)="refresh()"
     >
       <svg
         width="80px"
@@ -66,21 +68,21 @@
       </svg>
     </div>
     <div class="result-container result line_1">
-      <p *ngIf="loading" class="loading-p">Loading..</p>
-
-      <p *ngIf="!loading" class="result-paragraph">
+      <p class="result-paragraph">
         {{
-          exchangeService
-            .currCalc(
-              data,
-              exchangeService.activeCurrency1,
-              exchangeService.activeCurrency2,
-              input
-            )
-            .toFixed(2) + exchangeService.activeCurrency2
+          loading === false
+            ? exchangeService
+                .currCalc(
+                  data,
+                  exchangeService.activeCurrency1,
+                  exchangeService.activeCurrency2,
+                  input,
+                  reverse
+                )
+                .toFixed(2) + exchangeService.activeCurrency2
+            : "Loading.."
         }}
       </p>
     </div>
   </div>
-  <app-modal *ngIf="modalService.isVisible$ | async"></app-modal>
 </div>
