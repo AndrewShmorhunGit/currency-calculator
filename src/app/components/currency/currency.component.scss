@@ -56,3 +56,18 @@
     }
   }
 }
+
+@media (max-width: 37.5em) {
+  .currency {
+    transform: scale(0.8);
+    &:hover {
+      transform: scale(0.85);
+    }
+  }
+
+  .currency_disabled:hover {
+    &:hover {
+      transform: scale(0.8);
+    }
+  }
+}

@@ -14,3 +14,16 @@
     text-align: center;
   }
 }
+
+@media (max-width: 37.5em) {
+  .currency {
+    padding-bottom: 0.4rem;
+    p {
+      font-size: 3.2rem;
+      text-transform: capitalize;
+    }
+    p + p {
+      display: none;
+    }
+  }
+}

@@ -1,6 +1,6 @@
 <div class="body-container">
   <div class="relative">
-    <div class="main-currency-container line_1 container-secondary center">
+    <div class="main-currency-container scroll_1 container-secondary center">
       <app-currency
         *ngFor="let currencyObj1 of exchangeService.currencyLine1.currencies"
         [currencyObj]="currencyObj1"
@@ -21,7 +21,7 @@
       <app-add-currency></app-add-currency>
     </div>
   </div>
-  <div class="convert-to-container line_2 container-secondary center">
+  <div class="convert-to-container scroll_2 container-secondary center">
     <app-currency
       *ngFor="let currencyObj2 of exchangeService.currencyLine2.currencies"
       [currencyObj]="currencyObj2"
@@ -36,7 +36,7 @@
     </app-currency>
   </div>
 
-  <div class="result-mian-container container-secondary center">
+  <div class="result-main-container container-secondary center">
     <div class="result-container input-container center">
       <label for="#amount">{{ exchangeService.activeCurrency1 }} Amount:</label>
       <input type="number" name="input" id="#amount" [(ngModel)]="input" />
@@ -67,7 +67,7 @@
         </g>
       </svg>
     </div>
-    <div class="result-container result line_1">
+    <div class="result-container result scroll_3">
       <p class="result-paragraph">
         {{
           loading === false

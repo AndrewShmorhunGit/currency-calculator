@@ -1,5 +1,5 @@
 .body-container {
-  position: relative;
+  // position: relative;
   display: flex;
   flex-direction: column;
   gap: 4rem;
@@ -12,15 +12,16 @@
   border-radius: 1.2rem;
   justify-content: space-between;
   gap: 2rem;
-  padding: 2rem 4rem;
+  // padding: 2rem 4rem;
 }
 
 .relative {
   position: relative;
 }
 
-.line_1,
-.line_2 {
+.scroll_1,
+.scroll_2,
+.scroll_3 {
   overflow-x: scroll;
   &::-webkit-scrollbar {
     height: 1.2rem;
@@ -86,6 +87,7 @@
   label {
     font-size: 2rem;
   }
+
   input {
     font-size: 3.6rem;
     width: 90%;
@@ -139,6 +141,8 @@
   }
 
   .container-secondary {
+    max-width: 90vw;
+    max-width: 90dvw;
     gap: 1.6rem;
     padding: 1.6rem 3.2rem;
   }
@@ -160,6 +164,11 @@
     padding-top: 3.2rem;
     max-height: 18rem;
     min-width: 40rem;
+  }
+
+  .to-container {
+    left: calc(50% - 4rem);
+    top: 11.5rem;
   }
   .result-container {
     min-width: 16rem;
@@ -186,5 +195,103 @@
     input {
       font-size: 2.4rem;
     }
+  }
+}
+
+@media (max-width: 37.5em) {
+  .round-container {
+    width: 6rem;
+    height: 6rem;
+    font-size: 2rem;
+    padding: 1.6rem;
+    z-index: 2;
+  }
+
+  .to-container {
+    top: calc(50% - 3rem);
+    left: calc(100% - 2.8rem);
+  }
+
+  .body-container {
+    display: grid;
+    // max-height: 60rem;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 30rem;
+    column-gap: 1.2rem;
+    row-gap: 1.2rem;
+    // transform: scale(0.9);
+  }
+
+  .container-secondary {
+    display: flex;
+    flex-direction: column;
+    min-height: 16rem;
+    // max-height: 42rem;
+    width: 16.8rem;
+    border-radius: 1.2rem;
+    justify-content: space-between;
+    gap: 0rem;
+    padding: 0rem 0rem;
+  }
+
+  .main-currency-container {
+    max-height: 42rem;
+    grid-row: 1;
+    grid-column: 1;
+  }
+
+  .convert-to-container {
+    max-height: 42rem;
+    grid-row: 1;
+    grid-column: 2;
+  }
+
+  .result-main-container {
+    grid-row: 2;
+    grid-column: 1/3;
+    min-width: 36rem;
+    max-height: 32rem;
+    gap: 1rem;
+    padding: 1.2rem;
+
+    .result-container {
+      min-height: 8rem;
+      min-width: 12rem;
+      max-width: 90%;
+    }
+
+    .result {
+      overflow-x: scroll;
+      padding: 3.2rem 2rem 0 2rem;
+    }
+  }
+
+  .scroll_1,
+  .scroll_2 {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      height: 0.4rem;
+      width: 1.2rem;
+    }
+    &::-webkit-scrollbar-track {
+      background: #edf2ff;
+      border-top-right-radius: 2.4rem;
+      border-bottom-right-radius: 2.4rem;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: rgb(140, 233, 154, 0.5);
+      opacity: 90%;
+      border-radius: 2.4rem;
+      border: 1px solid #868e96;
+
+      &:active {
+        background: rgb(140, 233, 154);
+      }
+    }
+  }
+
+  .scroll_3 {
+    overflow-x: scroll;
   }
 }
