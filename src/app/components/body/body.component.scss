@@ -127,6 +127,11 @@
     gap: 1.6rem;
     padding: 1.6rem 3.2rem;
   }
+
+  .to-container {
+    left: calc(50% - 4rem);
+    top: 11.5rem;
+  }
 }
 @media (max-width: 62.5em) {
   .body-container {
@@ -144,10 +149,7 @@
     max-height: 18rem;
     min-width: 40rem;
   }
-  .to-container {
-    left: calc(50% - 4rem);
-    top: 11.5rem;
-  }
+
   .result-container {
     min-width: 16rem;
     height: 10rem;

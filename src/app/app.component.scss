@@ -3,17 +3,16 @@
   min-height: 100vh;
   min-height: 100dvh;
   min-width: 100vw;
-  overflow: hidden;
+  // overflow: hidden;
   // width: 100dvw;
   // flex-direction: column;
 }
 
 .main-container {
-  padding: 2rem 12rem;
+  padding: 1.2rem 8rem;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
 }
 
 .main-header {
